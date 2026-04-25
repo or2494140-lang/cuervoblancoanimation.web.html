@@ -705,8 +705,7 @@ nav.scrolled {
   <a href="https://or2494140-lang.github.io/cuervo-blanco-web/" target="_blank" rel="noopener noreferrer" class="nav-logo">🐦‍⬛ CUERVO <span>BLANCO</span></a>
   <ul class="nav-links">
     <li><a href="#about">Nosotros</a></li>
-    <li><a href="#services">Servicios</a></li>
-    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#services">Precios</a></li>
     <li><a href="#contact">Contacto</a></li>
   </ul>
 </nav>
@@ -816,51 +815,210 @@ nav.scrolled {
     <p class="section-label reveal">Tarifas & Trabajo</p>
     <h2 class="section-title reveal">PRECIOS Y<br>SERVICIOS</h2>
 
-    <!-- ══════════════════════════════════════════════════════════
-         🖼️  GALERÍA DE IMÁGENES — AQUÍ VAN TUS 5 IMÁGENES
-         Para agregar cada imagen, reemplaza el src="" con la ruta
-         de tu archivo (ej: src="imagen1.jpg") o una URL directa.
-         Puedes cambiar el texto debajo de cada imagen también.
-    ══════════════════════════════════════════════════════════ -->
-    <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:60px">
+    <!-- ══ TARJETAS DE PRECIOS Y SERVICIOS ══ -->
+    <style>
+      .price-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+        margin-bottom: 60px;
+      }
+      .price-card {
+        background: linear-gradient(160deg, rgba(30,0,0,0.9) 0%, rgba(10,0,0,0.95) 100%);
+        border: 1px solid rgba(192,0,26,0.35);
+        border-top: 3px solid var(--blood-bright);
+        padding: 30px 24px 26px;
+        position: relative;
+        overflow: hidden;
+        transition: transform .3s, box-shadow .3s, border-color .3s;
+        cursor: default;
+      }
+      .price-card::before {
+        content: '';
+        position: absolute;
+        top: -40px; right: -40px;
+        width: 100px; height: 100px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(192,0,26,0.12) 0%, transparent 70%);
+        pointer-events: none;
+      }
+      .price-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 40px rgba(192,0,26,0.25);
+        border-color: var(--blood-bright);
+      }
+      .price-card.featured {
+        border-top-color: #ff6600;
+        background: linear-gradient(160deg, rgba(50,10,0,0.95) 0%, rgba(20,0,0,0.98) 100%);
+      }
+      .price-card.featured .price-badge { display:block; }
+      .price-badge {
+        display: none;
+        position: absolute;
+        top: 14px; right: 14px;
+        background: #ff6600;
+        color: #fff;
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 11px;
+        letter-spacing: 2px;
+        padding: 3px 10px;
+        border-radius: 20px;
+      }
+      .price-icon { font-size: 36px; margin-bottom: 12px; display: block; }
+      .price-name {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 22px;
+        letter-spacing: 2px;
+        color: var(--white-crow);
+        margin-bottom: 6px;
+        line-height: 1.1;
+      }
+      .price-tag {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 38px;
+        color: var(--blood-bright);
+        line-height: 1;
+        margin: 10px 0 2px;
+      }
+      .price-tag span { font-size: 18px; vertical-align: top; margin-top: 6px; display: inline-block; }
+      .price-cop {
+        font-size: 11px;
+        color: var(--bone);
+        opacity: 0.45;
+        letter-spacing: 1px;
+        margin-bottom: 14px;
+      }
+      .price-divider {
+        width: 100%; height: 1px;
+        background: rgba(192,0,26,0.25);
+        margin: 14px 0;
+      }
+      .price-features { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+      .price-features li {
+        font-size: 12px;
+        color: var(--bone);
+        opacity: 0.75;
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        line-height: 1.5;
+      }
+      .price-features li::before {
+        content: '✦';
+        color: var(--blood-bright);
+        font-size: 10px;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      .price-note {
+        font-size: 10px;
+        opacity: 0.4;
+        margin-top: 14px;
+        font-style: italic;
+        letter-spacing: 0.5px;
+      }
+      .trm-note {
+        text-align: center;
+        font-size: 11px;
+        opacity: 0.4;
+        margin-bottom: 24px;
+        letter-spacing: 1px;
+      }
+    </style>
 
-      <!-- IMAGEN 1 — reemplaza src="" con tu imagen -->
-      <div style="position:relative;overflow:hidden;border:2px solid rgba(192,0,26,0.4);aspect-ratio:1;background:#1a0000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;cursor:pointer;transition:border-color .3s" onmouseover="this.style.borderColor='#C0001A'" onmouseout="this.style.borderColor='rgba(192,0,26,0.4)'">
-        <img src="" alt="Trabajo 1" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;top:0;left:0" onerror="this.style.display='none'">
-        <span style="font-size:30px;position:relative;z-index:1">🎨</span>
-        <span style="font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:3px;color:rgba(192,0,26,0.6);position:relative;z-index:1">IMAGEN 1</span>
+    <p class="trm-note reveal">💱 Precios en USD · TRM referencia: $3,551 COP/USD (25 abril 2026) · Precios sujetos a variación según complejidad del proyecto</p>
+
+    <div class="price-grid reveal">
+
+      <!-- TARJETA 1 — ILUSTRACIÓN / CONCEPT ART -->
+      <div class="price-card">
+        <span class="price-badge">POPULAR</span>
+        <span class="price-icon">✏️</span>
+        <div class="price-name">CONCEPT ART &<br>ILUSTRACIÓN</div>
+        <div class="price-tag"><span>$</span>15<span style="font-size:14px;opacity:.6"> – $40</span></div>
+        <div class="price-cop">≈ $53.000 – $142.000 COP por pieza</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Diseño de personaje completo</li>
+          <li>Hoja de model sheet básica</li>
+          <li>1–2 rondas de revisión</li>
+          <li>Entrega en PNG + PSD</li>
+          <li>Uso comercial incluido</li>
+        </ul>
+        <p class="price-note">* Precio varía según nivel de detalle</p>
       </div>
 
-      <!-- IMAGEN 2 — reemplaza src="" con tu imagen -->
-      <div style="position:relative;overflow:hidden;border:2px solid rgba(192,0,26,0.4);aspect-ratio:1;background:#1a0000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;cursor:pointer;transition:border-color .3s" onmouseover="this.style.borderColor='#C0001A'" onmouseout="this.style.borderColor='rgba(192,0,26,0.4)'">
-        <img src="" alt="Trabajo 2" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;top:0;left:0" onerror="this.style.display='none'">
-        <span style="font-size:30px;position:relative;z-index:1">🎬</span>
-        <span style="font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:3px;color:rgba(192,0,26,0.6);position:relative;z-index:1">IMAGEN 2</span>
+      <!-- TARJETA 2 — ANIMACIÓN CORTA -->
+      <div class="price-card featured">
+        <span class="price-badge">⭐ MÁS PEDIDO</span>
+        <span class="price-icon">🎬</span>
+        <div class="price-name">ANIMACIÓN 2D<br>CORTA</div>
+        <div class="price-tag"><span>$</span>50<span style="font-size:14px;opacity:.6"> – $120</span></div>
+        <div class="price-cop">≈ $177.000 – $426.000 COP</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Hasta 30 seg animados</li>
+          <li>Estilo 2D frame a frame o rig</li>
+          <li>Con fondo incluido</li>
+          <li>2 rondas de revisión</li>
+          <li>Entrega MP4 + archivos fuente</li>
+        </ul>
+        <p class="price-note">* Cotización exacta según duración</p>
       </div>
 
-      <!-- IMAGEN 3 — reemplaza src="" con tu imagen -->
-      <div style="position:relative;overflow:hidden;border:2px solid rgba(192,0,26,0.4);aspect-ratio:1;background:#1a0000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;cursor:pointer;transition:border-color .3s" onmouseover="this.style.borderColor='#C0001A'" onmouseout="this.style.borderColor='rgba(192,0,26,0.4)'">
-        <img src="" alt="Trabajo 3" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;top:0;left:0" onerror="this.style.display='none'">
-        <span style="font-size:30px;position:relative;z-index:1">✏️</span>
-        <span style="font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:3px;color:rgba(192,0,26,0.6);position:relative;z-index:1">IMAGEN 3</span>
+      <!-- TARJETA 3 — MOTION GRAPHICS / INTRO -->
+      <div class="price-card">
+        <span class="price-icon">⚡</span>
+        <div class="price-name">MOTION GRAPHICS<br>/ INTRO</div>
+        <div class="price-tag"><span>$</span>30<span style="font-size:14px;opacity:.6"> – $80</span></div>
+        <div class="price-cop">≈ $106.000 – $284.000 COP</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Intro / outro animado (5–15 seg)</li>
+          <li>Logo reveal o título animado</li>
+          <li>Tipografía animada</li>
+          <li>Con o sin música (licencia libre)</li>
+          <li>Entrega en MP4 con/sin fondo</li>
+        </ul>
+        <p class="price-note">* Ideal para YouTube y redes</p>
       </div>
 
-      <!-- IMAGEN 4 — reemplaza src="" con tu imagen -->
-      <div style="position:relative;overflow:hidden;border:2px solid rgba(192,0,26,0.4);aspect-ratio:1;background:#1a0000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;cursor:pointer;transition:border-color .3s" onmouseover="this.style.borderColor='#C0001A'" onmouseout="this.style.borderColor='rgba(192,0,26,0.4)'">
-        <img src="" alt="Trabajo 4" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;top:0;left:0" onerror="this.style.display='none'">
-        <span style="font-size:30px;position:relative;z-index:1">🐦‍⬛</span>
-        <span style="font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:3px;color:rgba(192,0,26,0.6);position:relative;z-index:1">IMAGEN 4</span>
+      <!-- TARJETA 4 — STORYBOARD -->
+      <div class="price-card">
+        <span class="price-icon">📋</span>
+        <div class="price-name">STORYBOARD<br>PROFESIONAL</div>
+        <div class="price-tag"><span>$</span>25<span style="font-size:14px;opacity:.6"> – $70</span></div>
+        <div class="price-cop">≈ $88.000 – $248.000 COP</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Hasta 20 viñetas dibujadas</li>
+          <li>Acotaciones de cámara y acción</li>
+          <li>Estilo limpio o boceto rápido</li>
+          <li>Entrega en PDF o JPG</li>
+          <li>1 revisión incluida</li>
+        </ul>
+        <p class="price-note">* +$1 USD por viñeta adicional</p>
       </div>
 
-      <!-- IMAGEN 5 — reemplaza src="" con tu imagen -->
-      <div style="position:relative;overflow:hidden;border:2px solid rgba(192,0,26,0.4);aspect-ratio:1;background:#1a0000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;cursor:pointer;transition:border-color .3s" onmouseover="this.style.borderColor='#C0001A'" onmouseout="this.style.borderColor='rgba(192,0,26,0.4)'">
-        <img src="" alt="Trabajo 5" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;top:0;left:0" onerror="this.style.display='none'">
-        <span style="font-size:30px;position:relative;z-index:1">🔥</span>
-        <span style="font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:3px;color:rgba(192,0,26,0.6);position:relative;z-index:1">IMAGEN 5</span>
+      <!-- TARJETA 5 — PAQUETE PUBLICIDAD / VIDEOCLIP -->
+      <div class="price-card">
+        <span class="price-icon">🎵</span>
+        <div class="price-name">VIDEOCLIP /<br>PUBLICIDAD</div>
+        <div class="price-tag"><span>$</span>100<span style="font-size:14px;opacity:.6"> – $250</span></div>
+        <div class="price-cop">≈ $355.000 – $888.000 COP</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Hasta 1 minuto animado</li>
+          <li>Diseño de personajes incluido</li>
+          <li>Fondos y escenografía</li>
+          <li>Sincronización con audio</li>
+          <li>3 rondas de revisión</li>
+        </ul>
+        <p class="price-note">* Cotización personalizada disponible</p>
       </div>
 
     </div>
-    <!-- ══ FIN GALERÍA DE IMÁGENES ══ -->
+    <!-- ══ FIN TARJETAS DE PRECIOS ══ -->
 
     <div class="services-grid reveal">
       <div class="service-card">
@@ -903,95 +1061,7 @@ nav.scrolled {
   </div>
 </section>
 
-<!-- TEAR -->
-<div class="tear" style="transform:scaleY(-1)">
-  <svg viewBox="0 0 1440 50" preserveAspectRatio="none">
-    <path d="M0,0 L48,30 L96,8 L144,38 L192,12 L240,42 L288,15 L336,40 L384,10 L432,35 L480,5 L528,38 L576,18 L624,45 L672,8 L720,35 L768,12 L816,40 L864,5 L912,30 L960,15 L1008,42 L1056,10 L1104,38 L1152,8 L1200,35 L1248,18 L1296,40 L1344,5 L1392,30 L1440,0 L1440,50 L0,50 Z" fill="rgba(0,0,0,0.25)"/>
-  </svg>
-</div>
 
-<!-- PORTFOLIO -->
-<section id="portfolio">
-  <div style="max-width:1200px;margin:0 auto">
-    <p class="section-label reveal">Trabajos</p>
-    <h2 class="section-title reveal">PORTFOLIO</h2>
-    <div class="portfolio-grid reveal">
-
-      <div class="portfolio-item">
-        <div class="portfolio-img" style="background:linear-gradient(135deg,#1a0010,#3d0000)">🌑</div>
-        <div class="portfolio-overlay">
-          <div class="portfolio-overlay-title">LUNA ROTA</div>
-          <div class="portfolio-overlay-tag">CORTOMETRAJE · 2024</div>
-        </div>
-        <div class="portfolio-meta">
-          <div class="portfolio-name">Luna Rota</div>
-          <div class="portfolio-type">Cortometraje Animado</div>
-        </div>
-      </div>
-
-      <div class="portfolio-item">
-        <div class="portfolio-img" style="background:linear-gradient(135deg,#0a1a0a,#003300)">🐍</div>
-        <div class="portfolio-overlay">
-          <div class="portfolio-overlay-title">VENENO</div>
-          <div class="portfolio-overlay-tag">VIDEOCLIP · 2024</div>
-        </div>
-        <div class="portfolio-meta">
-          <div class="portfolio-name">Veneno</div>
-          <div class="portfolio-type">Videoclip Musical</div>
-        </div>
-      </div>
-
-      <div class="portfolio-item">
-        <div class="portfolio-img" style="background:linear-gradient(135deg,#1a0a00,#3d1500)">🔥</div>
-        <div class="portfolio-overlay">
-          <div class="portfolio-overlay-title">CENIZAS</div>
-          <div class="portfolio-overlay-tag">MOTION GRAPHICS · 2024</div>
-        </div>
-        <div class="portfolio-meta">
-          <div class="portfolio-name">Cenizas</div>
-          <div class="portfolio-type">Motion Graphics</div>
-        </div>
-      </div>
-
-      <div class="portfolio-item">
-        <div class="portfolio-img" style="background:linear-gradient(135deg,#0a001a,#1a0033)">🌀</div>
-        <div class="portfolio-overlay">
-          <div class="portfolio-overlay-title">LABERINTO</div>
-          <div class="portfolio-overlay-tag">SERIE · EN DESARROLLO</div>
-        </div>
-        <div class="portfolio-meta">
-          <div class="portfolio-name">Laberinto</div>
-          <div class="portfolio-type">Serie Animada — En desarrollo</div>
-        </div>
-      </div>
-
-      <div class="portfolio-item">
-        <div class="portfolio-img" style="background:linear-gradient(135deg,#1a1a00,#2a2000)">👁️</div>
-        <div class="portfolio-overlay">
-          <div class="portfolio-overlay-title">EL TESTIGO</div>
-          <div class="portfolio-overlay-tag">CONCEPT ART · 2023</div>
-        </div>
-        <div class="portfolio-meta">
-          <div class="portfolio-name">El Testigo</div>
-          <div class="portfolio-type">Concept Art & Diseño</div>
-        </div>
-      </div>
-
-      <div class="portfolio-item">
-        <div class="portfolio-img" style="background:linear-gradient(135deg,#001a1a,#003333)">🌊</div>
-        <div class="portfolio-overlay">
-          <div class="portfolio-overlay-title">MAREA</div>
-          <div class="portfolio-overlay-tag">STORYBOARD · 2023</div>
-        </div>
-        <div class="portfolio-meta">
-          <div class="portfolio-name">Marea</div>
-          <div class="portfolio-type">Storyboard Cinematográfico</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 <!-- CONTACT -->
 <section id="contact" style="background:rgba(0,0,0,0.35); border-top:1px solid rgba(192,0,26,0.2)">
@@ -1060,8 +1130,7 @@ nav.scrolled {
       <div class="footer-col-title">Navegación</div>
       <ul class="footer-links">
         <li><a href="#about">Nosotros</a></li>
-        <li><a href="#services">Servicios</a></li>
-        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#services">Precios</a></li>
         <li><a href="#contact">Contacto</a></li>
       </ul>
     </div>
