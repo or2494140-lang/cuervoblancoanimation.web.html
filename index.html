@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CUERVO BLANCO ANIMATIONS</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Permanent+Marker&display=swap" rel="stylesheet">
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  // ══════════════════════════════════════════════════════════════
+  // 🔑 EMAILJS — PEGA AQUÍ TUS CREDENCIALES (ver instrucciones abajo)
+  // ══════════════════════════════════════════════════════════════
+  const EMAILJS_PUBLIC_KEY  = 'RmwYq__mjSHADIjm7';
+  const EMAILJS_SERVICE_ID  = 'service_xbn2yko';
+  const EMAILJS_TEMPLATE_ID = 'servicio_xbn2yko';
+  // ══════════════════════════════════════════════════════════════
+</script>
 <style>
 :root {
   --blood: #8B0000;
@@ -1082,20 +1093,20 @@ nav.scrolled {
       </a>
     </div>
 
-    <form class="contact-form reveal" onsubmit="handleForm(event)">
+    <form class="contact-form reveal" id="contactForm" onsubmit="handleForm(event)">
       <div class="form-row">
         <div class="form-group">
           <label>Nombre</label>
-          <input type="text" placeholder="Tu nombre" required>
+          <input type="text" id="field_nombre" name="nombre" placeholder="Tu nombre" required>
         </div>
         <div class="form-group">
           <label>Email</label>
-          <input type="email" placeholder="tu@email.com" required>
+          <input type="email" id="field_email" name="email" placeholder="tu@email.com" required>
         </div>
       </div>
       <div class="form-group">
         <label>Tipo de Proyecto</label>
-        <select>
+        <select id="field_proyecto" name="proyecto">
           <option>Animación 2D</option>
           <option>Motion Graphics</option>
           <option>Videoclip</option>
@@ -1106,9 +1117,10 @@ nav.scrolled {
       </div>
       <div class="form-group">
         <label>Cuéntanos</label>
-        <textarea placeholder="Describe tu proyecto, tu visión, tu locura..."></textarea>
+        <textarea id="field_mensaje" name="mensaje" placeholder="Describe tu proyecto, tu visión, tu locura..."></textarea>
       </div>
-      <button type="submit" class="btn-submit">ENVIAR MENSAJE ✦</button>
+      <button type="submit" class="btn-submit" id="btnSubmit">ENVIAR MENSAJE ✦</button>
+      <p id="form-error" style="display:none;color:#ff4444;font-size:13px;margin-top:10px;text-align:center">❌ Hubo un error al enviar. Intenta de nuevo o escríbenos directamente.</p>
     </form>
 
     <div id="form-success" style="display:none;text-align:center;margin-top:30px">
@@ -1383,11 +1395,34 @@ const revealObs=new IntersectionObserver(entries=>{
 },{threshold:0.15});
 reveals.forEach(r=>revealObs.observe(r));
 
-// ── FORM ─────────────────────────────────────────────────────
-function handleForm(e){
+// ── FORM CON EMAILJS ─────────────────────────────────────────
+emailjs.init(EMAILJS_PUBLIC_KEY);
+
+async function handleForm(e){
   e.preventDefault();
-  document.querySelector('.contact-form').style.display='none';
-  document.getElementById('form-success').style.display='block';
+  const btn = document.getElementById('btnSubmit');
+  const errEl = document.getElementById('form-error');
+  errEl.style.display = 'none';
+  btn.textContent = 'ENVIANDO...';
+  btn.disabled = true;
+
+  const params = {
+    nombre:   document.getElementById('field_nombre').value,
+    email:    document.getElementById('field_email').value,
+    proyecto: document.getElementById('field_proyecto').value,
+    mensaje:  document.getElementById('field_mensaje').value,
+  };
+
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  } catch(err) {
+    console.error('EmailJS error:', err);
+    btn.textContent = 'ENVIAR MENSAJE ✦';
+    btn.disabled = false;
+    errEl.style.display = 'block';
+  }
 }
 
 // ── PARALLAX subtle paper ─────────────────────────────────────
