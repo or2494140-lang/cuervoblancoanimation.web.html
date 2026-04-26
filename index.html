@@ -80,6 +80,16 @@ body::before {
   animation: grain 0.5s steps(1) infinite;
 }
 
+  @keyframes bounce {
+    0%,100%{ transform: translateY(0); }
+    50%{ transform: translateY(8px); }
+  }
+
+@keyframes arrowPulse {
+  0%,100%{ opacity:0.3; transform:translateY(-4px); }
+  50%{ opacity:1; transform:translateY(4px); }
+}
+
 @keyframes grain {
   0%,100%{transform:translate(0,0)}
   10%{transform:translate(-2%,-3%)}
@@ -180,6 +190,12 @@ body::before {
 @keyframes fadeUp {
   from { opacity:0; transform:translateY(20px); }
   to   { opacity:1; transform:translateY(0); }
+}
+@keyframes bounce { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(7px); } }
+
+@keyframes bounce {
+  0%,100%{ transform: translateY(0); }
+  50%{ transform: translateY(10px); }
 }
 
 .hero-sub {
@@ -767,6 +783,19 @@ nav.scrolled {
   <h1 class="hero-title">CUERVO<br><span class="highlight">BLANCO</span></h1>
   <p class="hero-sub">ANIMATIONS</p>
   <p style="font-family:'Special Elite',serif;font-size:13px;letter-spacing:4px;color:rgba(232,213,176,0.45);margin-top:6px;opacity:0;animation:fadeUp .8s ease forwards 1s">por Oscar Rodriguez</p>
+
+  <!-- FLECHA ESQUINA SUPERIOR DERECHA — al lado del logo -->
+  <div style="position:absolute;top:90px;right:24px;display:flex;align-items:center;gap:12px;opacity:0;animation:fadeUp .8s ease forwards 1.5s;pointer-events:none;z-index:5;background:rgba(0,0,0,0.45);border:1px solid rgba(192,0,26,0.5);border-radius:4px;padding:10px 16px;">
+    <span style="font-family:'Special Elite',serif;font-size:13px;letter-spacing:2px;color:rgba(232,213,176,0.9);text-align:right;line-height:1.6;text-shadow:0 0 10px rgba(192,0,26,0.6)">sigue bajando<br>para más info</span>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:2px;animation:bounce 1.5s ease-in-out infinite">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 4 L12 18 M6 13 L12 19 L18 13" stroke="#C0001A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow2)"/>
+      </svg>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.5;margin-top:-10px">
+        <path d="M12 4 L12 18 M6 13 L12 19 L18 13" stroke="#C0001A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
 
   <div class="hero-cta">
     <a href="https://or2494140-lang.github.io/cuervo-blanco-web/" target="_blank" rel="noopener noreferrer" class="btn-main"><span>VER TRABAJO</span></a>
