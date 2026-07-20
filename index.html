@@ -3,23 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cuervo Blanco Animations — Animación 2D/3D & Motion Design</title>
+<title>Cuervo Blanco Animations — Estudio de animación 2D, 3D y Stop Motion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#0a0a0c;
-    --panel:#15151a;
-    --bone:#f5f1e6;
-    --bone-dim:#dcd6c4;
-    --red:#ff2d4d;
-    --cyan:#39e6c4;
-    --yellow:#ffd23f;
-    --line:#0a0a0c;
-    --display: 'Bangers', cursive;
-    --body: 'Archivo', sans-serif;
-    --mono: 'Space Mono', monospace;
+    --bg:#0a0a0b;
+    --surface:#141416;
+    --surface-2:#1b1b1e;
+    --line:#2b2d30;
+    --steel:#71757c;
+    --steel-dark:#3a3c40;
+    --chrome:#e3e6e9;
+    --chrome-dim:#aeb2b7;
+    --ember:#ff5a1f;
+    --ember-dim:#c9430f;
+    --ember-glow:#ffb347;
+    --bone:#e9e6dd;
+    --bone-dim:#98958c;
+    --display:'Big Shoulders Display', sans-serif;
+    --body:'IBM Plex Sans', sans-serif;
+    --mono:'IBM Plex Mono', monospace;
   }
 
   *{ box-sizing:border-box; }
@@ -27,22 +32,23 @@
 
   body{
     margin:0;
-    background:var(--bone);
-    color:var(--ink);
+    background:var(--bg);
+    color:var(--bone);
     font-family:var(--body);
     overflow-x:hidden;
     position:relative;
   }
 
-  /* ===== TEXTURA DE PAPEL / TRAMA COMIC ===== */
-  .halftone-bg{
+  /* ===== TEXTURA METAL CEPILLADO ===== */
+  .brushed-bg{
     position:fixed;
     inset:0;
     pointer-events:none;
     z-index:0;
-    background-image:radial-gradient(circle, rgba(10,10,12,0.06) 1px, transparent 1.4px);
-    background-size:7px 7px;
-    opacity:.7;
+    background-image:
+      repeating-linear-gradient(97deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 4px),
+      radial-gradient(ellipse at 20% -10%, rgba(255,90,31,0.08), transparent 55%),
+      radial-gradient(ellipse at 90% 110%, rgba(227,230,233,0.05), transparent 50%);
   }
 
   .grain{
@@ -50,7 +56,7 @@
     inset:0;
     pointer-events:none;
     z-index:1000;
-    opacity:.05;
+    opacity:.045;
     mix-blend-mode:overlay;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
@@ -68,14 +74,15 @@
     position:sticky;
     top:0;
     z-index:500;
-    background:var(--bone);
-    border-bottom:4px solid var(--ink);
+    background:rgba(10,10,11,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
   }
   .navbar{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:14px 24px;
+    padding:16px 24px;
     max-width:1180px;
     margin:0 auto;
   }
@@ -84,570 +91,365 @@
     align-items:center;
     gap:12px;
     text-decoration:none;
-    color:var(--ink);
+    color:var(--bone);
   }
   .brand-text{
     font-family:var(--display);
-    font-size:1.5rem;
+    font-weight:800;
+    font-size:1.4rem;
     letter-spacing:.5px;
     line-height:1;
+    background:linear-gradient(180deg, var(--chrome) 0%, var(--steel) 60%, var(--chrome-dim) 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
   }
   .brand-text small{
     display:block;
     font-family:var(--mono);
     font-size:.6rem;
     letter-spacing:3px;
-    color:var(--red);
+    color:var(--ember);
     font-weight:700;
+    -webkit-text-fill-color:var(--ember);
   }
   nav.links{ display:flex; gap:28px; }
   nav.links a{
     text-decoration:none;
-    color:var(--ink);
-    font-weight:700;
-    font-size:.85rem;
+    color:var(--bone-dim);
+    font-weight:600;
+    font-size:.82rem;
     text-transform:uppercase;
-    letter-spacing:1px;
+    letter-spacing:1.5px;
     position:relative;
+    transition:color .15s ease;
   }
+  nav.links a:hover{ color:var(--chrome); }
   nav.links a::after{
     content:'';
     position:absolute;
     left:0; bottom:-6px;
-    height:3px; width:0;
-    background:var(--red);
+    height:2px; width:0;
+    background:var(--ember);
     transition:width .2s ease;
   }
   nav.links a:hover::after{ width:100%; }
 
-  /* ===== BOTONES 3D / INTERACCION ===== */
+  /* ===== BOTONES ===== */
   .btn{
     --tilt-x:0deg; --tilt-y:0deg;
     display:inline-flex;
     align-items:center;
     gap:10px;
     font-family:var(--display);
+    font-weight:700;
     font-size:1.05rem;
     letter-spacing:.5px;
     padding:14px 30px;
-    border:3px solid var(--ink);
-    background:var(--yellow);
-    color:var(--ink);
+    border:1px solid var(--steel-dark);
+    background:linear-gradient(180deg, var(--surface-2), var(--surface));
+    color:var(--chrome);
     text-decoration:none;
     cursor:pointer;
     position:relative;
     transform-style:preserve-3d;
     transform:perspective(600px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translateZ(0);
-    transition:transform .12s ease-out, box-shadow .12s ease-out;
-    box-shadow:6px 6px 0 var(--ink);
+    transition:transform .12s ease-out, box-shadow .12s ease-out, border-color .12s ease-out;
+    box-shadow:0 1px 0 rgba(255,255,255,0.06) inset, 0 6px 18px rgba(0,0,0,.5);
   }
-  .btn:hover{
-    box-shadow:10px 10px 0 var(--ink);
-  }
-  .btn:active{
-    transform:perspective(600px) translateZ(-4px) scale(.97);
-    box-shadow:2px 2px 0 var(--ink);
-  }
-  .btn.btn-red{ background:var(--red); color:var(--bone); }
-  .btn.btn-cyan{ background:var(--cyan); color:var(--ink); }
-  .btn.btn-ghost{ background:var(--bone); }
+  .btn:hover{ border-color:var(--ember); box-shadow:0 1px 0 rgba(255,255,255,0.08) inset, 0 8px 24px rgba(255,90,31,.18); }
+  .btn:active{ transform:perspective(600px) translateZ(-4px) scale(.97); }
+  .btn.btn-ember{ background:linear-gradient(180deg, var(--ember), var(--ember-dim)); color:#100a06; border-color:var(--ember-dim); }
+  .btn.btn-ember:hover{ box-shadow:0 1px 0 rgba(255,255,255,0.25) inset, 0 8px 26px rgba(255,90,31,.4); }
+  .btn.btn-ghost{ background:transparent; }
   .btn-small{ padding:10px 20px; font-size:.85rem; }
 
   /* ===== HERO ===== */
   .hero{
     position:relative;
-    padding:90px 0 60px;
-    border-bottom:4px solid var(--ink);
-    background:
-      repeating-linear-gradient(135deg, rgba(10,10,12,0.035) 0 2px, transparent 2px 14px);
+    padding:100px 0 70px;
+    border-bottom:1px solid var(--line);
   }
-  .hero-grid{
-    display:block;
-    max-width:680px;
-  }
+  .hero-grid{ display:block; max-width:700px; }
   .eyebrow{
-    font-family:var(--mono);
-    font-size:.78rem;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    color:var(--red);
-    font-weight:700;
-    display:inline-block;
-    margin-bottom:14px;
-  }
-  .hero h1{
-    font-family:var(--display);
-    font-size:clamp(3rem, 6vw, 5.2rem);
-    line-height:.95;
-    margin:0 0 18px;
-    letter-spacing:1px;
-    text-shadow:4px 4px 0 var(--red);
-  }
-  .hero h1 span{ color:var(--ink); -webkit-text-stroke:0; }
-  .hero p.lead{
-    font-size:1.15rem;
-    line-height:1.6;
-    max-width:480px;
-    margin:0 0 28px;
-    font-weight:500;
-  }
-  .cta-row{ display:flex; gap:16px; flex-wrap:wrap; }
-
-
-  /* ===== SECCION GENERICA / PANEL ===== */
-  section{ position:relative; padding:70px 0; border-bottom:4px solid var(--ink); }
-  section:last-of-type{ border-bottom:none; }
-  .section-head{ margin-bottom:44px; max-width:640px; }
-  .section-tag{
     font-family:var(--mono);
     font-size:.75rem;
     letter-spacing:3px;
     text-transform:uppercase;
-    color:var(--red);
+    color:var(--ember);
     font-weight:700;
-    margin-bottom:10px;
+    display:inline-block;
+    margin-bottom:18px;
+  }
+  .hero h1{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(3rem, 6.4vw, 5.6rem);
+    line-height:.94;
+    margin:0 0 22px;
+    letter-spacing:.5px;
+    background:linear-gradient(180deg, var(--chrome) 0%, var(--steel) 45%, var(--bone) 58%, var(--steel-dark) 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    filter:drop-shadow(0 3px 0 rgba(0,0,0,.6));
+  }
+  .hero p.lead{
+    font-size:1.12rem;
+    line-height:1.65;
+    max-width:500px;
+    margin:0 0 32px;
+    font-weight:400;
+    color:var(--bone-dim);
+  }
+  .cta-row{ display:flex; gap:16px; flex-wrap:wrap; }
+
+  /* ===== SECCION GENERICA ===== */
+  section{ position:relative; padding:74px 0; border-bottom:1px solid var(--line); }
+  section:last-of-type{ border-bottom:none; }
+  .section-head{ margin-bottom:46px; max-width:640px; }
+  .section-tag{
+    font-family:var(--mono);
+    font-size:.72rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--ember);
+    font-weight:700;
+    margin-bottom:12px;
     display:block;
   }
   .section-head h2{
     font-family:var(--display);
-    font-size:clamp(2.2rem,4vw,3.2rem);
+    font-weight:800;
+    font-size:clamp(2.1rem,4vw,3rem);
     margin:0 0 14px;
-    letter-spacing:.5px;
+    letter-spacing:.3px;
+    color:var(--chrome);
   }
-  .section-head p{ font-size:1.05rem; line-height:1.6; color:#2b2b2b; }
+  .section-head p{ font-size:1.02rem; line-height:1.65; color:var(--bone-dim); }
+
+  /* placa remachada — elemento firma */
+  .riveted{ position:relative; }
+  .riveted::before{
+    content:'';
+    position:absolute;
+    inset:9px;
+    pointer-events:none;
+    background:
+      radial-gradient(circle 3.5px at 0 0, var(--chrome-dim) 55%, transparent 58%),
+      radial-gradient(circle 3.5px at 100% 0, var(--chrome-dim) 55%, transparent 58%),
+      radial-gradient(circle 3.5px at 0 100%, var(--chrome-dim) 55%, transparent 58%),
+      radial-gradient(circle 3.5px at 100% 100%, var(--chrome-dim) 55%, transparent 58%);
+    opacity:.55;
+  }
 
   /* ===== SERVICIOS ===== */
   .services-grid{
     display:grid;
     grid-template-columns:repeat(3, 1fr);
-    gap:0;
-    border:4px solid var(--ink);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
   }
   .service-card{
-    background:var(--bone);
-    padding:32px 26px;
-    border-right:4px solid var(--ink);
-    border-bottom:4px solid var(--ink);
+    background:var(--surface);
+    padding:34px 28px;
     position:relative;
     transition:background .15s ease;
   }
-  .services-grid .service-card:nth-child(3n){ border-right:none; }
-  .services-grid .service-card:last-child{ border-right:none; }
-  .services-grid .service-card:nth-last-child(-n+2){ border-bottom:none; }
-  .service-card:hover{ background:#eee8d8; }
-  .service-icon{
-    width:54px; height:54px;
-    margin-bottom:16px;
-    display:block;
-  }
+  .service-card:hover{ background:var(--surface-2); }
+  .service-icon{ width:50px; height:50px; margin-bottom:18px; display:block; }
   .service-card h3{
     font-family:var(--display);
-    font-size:1.5rem;
+    font-weight:700;
+    font-size:1.4rem;
     margin:0 0 10px;
     letter-spacing:.3px;
+    color:var(--chrome);
   }
-  .service-card p{
-    font-size:.92rem;
-    line-height:1.55;
-    color:#333;
-    margin:0 0 16px;
-  }
+  .service-card p{ font-size:.92rem; line-height:1.58; color:var(--bone-dim); margin:0 0 18px; }
   .service-tags{ display:flex; flex-wrap:wrap; gap:6px; }
   .tag-chip{
     font-family:var(--mono);
-    font-size:.68rem;
+    font-size:.66rem;
     letter-spacing:1px;
-    border:2px solid var(--ink);
-    padding:3px 8px;
-    background:var(--yellow);
+    text-transform:uppercase;
+    border:1px solid var(--steel-dark);
+    padding:4px 9px;
+    background:var(--surface-2);
+    color:var(--chrome-dim);
+  }
+
+  /* ===== HERRAMIENTAS ===== */
+  .tools-row{ display:flex; flex-wrap:wrap; gap:10px; }
+  .tool-pill{
+    font-family:var(--mono);
+    font-size:.82rem;
+    letter-spacing:.5px;
+    padding:9px 18px;
+    border:1px solid var(--steel-dark);
+    background:linear-gradient(180deg, var(--surface-2), var(--surface));
+    color:var(--chrome);
   }
 
   /* ===== PRECIOS ===== */
-  .price-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:26px;
-  }
+  .price-grid{ display:grid; grid-template-columns:1fr 1fr; gap:26px; }
   .price-card{
-    border:4px solid var(--ink);
-    background:var(--bone);
-    padding:30px 26px 28px;
-    position:relative;
-    box-shadow:8px 8px 0 var(--ink);
-    transform-style:preserve-3d;
-    transform:perspective(700px) rotateX(0) rotateY(0);
-    transition:transform .15s ease-out, box-shadow .15s ease-out;
-  }
-  .price-card:hover{ box-shadow:12px 12px 0 var(--ink); }
-  .price-card.featured{ background:var(--ink); color:var(--bone); }
-  .price-card.featured .tag-chip{ background:var(--cyan); color:var(--ink); }
-  .price-card.featured .price-unit{ color:var(--bone-dim); }
-  .ribbon{
-    position:absolute;
-    top:-14px; right:18px;
-    background:var(--red);
-    color:var(--bone);
-    font-family:var(--mono);
-    font-size:.68rem;
-    letter-spacing:2px;
-    padding:6px 12px;
-    border:2px solid var(--ink);
-    transform:rotate(3deg);
+    border:1px solid var(--steel-dark);
+    background:linear-gradient(165deg, var(--surface-2) 0%, var(--surface) 100%);
+    padding:32px 30px 28px;
+    box-shadow:0 14px 34px rgba(0,0,0,.45);
   }
   .price-card h3{
     font-family:var(--display);
-    font-size:1.6rem;
-    margin:6px 0 4px;
+    font-weight:800;
+    font-size:1.7rem;
+    margin:10px 0 6px;
+    color:var(--chrome);
   }
-  .price-amount{
-    font-family:var(--display);
-    font-size:2.6rem;
-    margin:14px 0 2px;
-    color:var(--red);
+  .price-card .tag-chip{ background:var(--ember); color:#100a06; border-color:var(--ember-dim); font-weight:700; }
+  .price-list{ list-style:none; margin:22px 0 22px; padding:0; }
+  .price-line{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:14px;
+    padding:11px 0;
+    border-bottom:1px dashed var(--line);
+    font-size:.94rem;
   }
-  .price-card.featured .price-amount{ color:var(--yellow); }
-  .price-unit{
+  .price-line:last-child{ border-bottom:none; }
+  .price-line .item{ color:var(--bone); }
+  .price-line .item small{ display:block; color:var(--bone-dim); font-size:.78rem; margin-top:2px; }
+  .price-line .amount{ font-family:var(--mono); font-weight:700; color:var(--ember); white-space:nowrap; }
+  .price-note{
     font-family:var(--mono);
-    font-size:.75rem;
-    color:#555;
-    margin-bottom:20px;
-    display:block;
-  }
-  .price-list{
-    list-style:none;
-    margin:0 0 24px;
-    padding:0;
-    font-size:.9rem;
+    font-size:.8rem;
+    color:var(--bone-dim);
+    border-top:1px solid var(--line);
+    padding-top:16px;
     line-height:1.6;
   }
-  .price-list li{
-    padding-left:22px;
-    position:relative;
-    margin-bottom:8px;
-  }
-  .price-list li::before{
-    content:'⚡';
-    position:absolute;
-    left:0; top:0;
-    color:var(--red);
-  }
-  .price-card.featured .price-list li::before{ color:var(--yellow); }
+  .price-note strong{ color:var(--ember); }
 
   /* ===== PROCESO ===== */
-  .process-strip{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:0;
-    border:4px solid var(--ink);
-  }
-  .process-step{
-    padding:28px 22px;
-    border-right:4px solid var(--ink);
-    background:var(--bone);
-    position:relative;
-  }
-  .process-strip .process-step:last-child{ border-right:none; background:var(--red); color:var(--bone); }
-  .step-num{
-    font-family:var(--display);
-    font-size:2.4rem;
-    color:var(--red);
-    line-height:1;
-    display:block;
-    margin-bottom:10px;
-  }
-  .process-strip .process-step:last-child .step-num{ color:var(--yellow); }
-  .process-step h4{ margin:0 0 8px; font-size:1.05rem; font-weight:800; }
-  .process-step p{ margin:0; font-size:.85rem; line-height:1.5; color:#333; }
-  .process-strip .process-step:last-child p{ color:var(--bone-dim); }
+  .process-strip{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  .process-step{ padding:30px 24px; background:var(--surface); position:relative; }
+  .process-strip .process-step:last-child{ background:linear-gradient(165deg, var(--ember), var(--ember-dim)); color:#100a06; }
+  .step-num{ font-family:var(--display); font-weight:800; font-size:2.3rem; color:var(--ember); line-height:1; display:block; margin-bottom:10px; }
+  .process-strip .process-step:last-child .step-num{ color:rgba(16,10,6,.55); }
+  .process-step h4{ margin:0 0 8px; font-size:1.02rem; font-weight:700; color:var(--chrome); }
+  .process-strip .process-step:last-child h4{ color:#100a06; }
+  .process-step p{ margin:0; font-size:.86rem; line-height:1.55; color:var(--bone-dim); }
+  .process-strip .process-step:last-child p{ color:rgba(16,10,6,.75); }
 
   /* ===== PAGO ===== */
   .pay-banner{
-    border:4px solid var(--ink);
-    background:repeating-linear-gradient(-45deg, var(--ink) 0 18px, #1f1f25 18px 36px);
+    border:1px solid var(--steel-dark);
+    background:repeating-linear-gradient(-45deg, var(--surface) 0 18px, var(--surface-2) 18px 36px);
     color:var(--bone);
-    padding:40px 36px;
+    padding:42px 38px;
     display:flex;
     align-items:center;
     justify-content:space-between;
     gap:30px;
     flex-wrap:wrap;
   }
-  .pay-banner-text h3{
-    font-family:var(--display);
-    font-size:1.8rem;
-    margin:0 0 8px;
-    color:var(--yellow);
-  }
+  .pay-banner-text h3{ font-family:var(--display); font-weight:800; font-size:1.7rem; margin:0 0 8px; color:var(--chrome); }
   .pay-banner-text p{ margin:0; max-width:480px; font-size:.95rem; line-height:1.55; color:var(--bone-dim); }
   .pay-methods{ display:flex; gap:14px; }
-  .pay-pill{
-    background:var(--bone);
-    color:var(--ink);
-    border:3px solid var(--bone);
-    padding:12px 22px;
-    font-family:var(--mono);
-    font-weight:700;
-    letter-spacing:1px;
-    font-size:.85rem;
-  }
+  .pay-pill{ background:var(--ember); color:#100a06; border:1px solid var(--ember-dim); padding:12px 22px; font-family:var(--mono); font-weight:700; letter-spacing:1px; font-size:.85rem; }
 
   /* ===== TERMINOS ===== */
-  .terms-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:0;
-    border:4px solid var(--ink);
-  }
-  .term-card{
-    background:var(--bone);
-    padding:32px 26px;
-    border-right:4px solid var(--ink);
-    position:relative;
-  }
-  .terms-grid .term-card:last-child{ border-right:none; background:var(--ink); color:var(--bone); }
-  .term-icon{
-    font-family:var(--display);
-    font-size:2.2rem;
-    color:var(--red);
-    display:block;
-    margin-bottom:10px;
-  }
-  .terms-grid .term-card:last-child .term-icon{ color:var(--yellow); }
-  .term-card h3{
-    font-family:var(--display);
-    font-size:1.3rem;
-    margin:0 0 10px;
-    letter-spacing:.3px;
-  }
-  .term-card p{
-    font-size:.92rem;
-    line-height:1.55;
-    margin:0;
-    color:#333;
-  }
-  .terms-grid .term-card:last-child p{ color:var(--bone-dim); }
-  .term-card p strong{ color:var(--red); }
-  .terms-grid .term-card:last-child p strong{ color:var(--yellow); }
+  .terms-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  .term-card{ background:var(--surface); padding:34px 28px; position:relative; }
+  .term-icon{ font-family:var(--display); font-weight:800; font-size:2rem; color:var(--ember); display:block; margin-bottom:12px; }
+  .term-card h3{ font-family:var(--display); font-weight:700; font-size:1.25rem; margin:0 0 10px; color:var(--chrome); letter-spacing:.3px; }
+  .term-card p{ font-size:.92rem; line-height:1.58; margin:0; color:var(--bone-dim); }
+  .term-card p strong{ color:var(--ember); }
 
   /* ===== CONTACTO ===== */
   .contact-panel{
-    border:4px solid var(--ink);
-    background:var(--bone);
-    padding:60px 50px;
+    border:1px solid var(--steel-dark);
+    background:linear-gradient(165deg, var(--surface-2), var(--surface));
+    padding:64px 54px;
     text-align:center;
     position:relative;
-    box-shadow:12px 12px 0 var(--red);
+    box-shadow:0 20px 50px rgba(0,0,0,.5);
   }
-  .contact-panel h2{
-    font-family:var(--display);
-    font-size:clamp(2.4rem,5vw,3.6rem);
-    margin:0 0 14px;
-  }
-  .contact-panel p{ font-size:1.05rem; max-width:520px; margin:0 auto 30px; line-height:1.6; }
+  .contact-panel h2{ font-family:var(--display); font-weight:800; font-size:clamp(2.2rem,5vw,3.4rem); margin:0 0 16px; color:var(--chrome); }
+  .contact-panel p{ font-size:1.04rem; max-width:520px; margin:0 auto 30px; line-height:1.6; color:var(--bone-dim); }
   .email-display{
     font-family:var(--mono);
-    font-size:1.1rem;
-    background:var(--ink);
-    color:var(--cyan);
-    padding:10px 18px;
+    font-size:1.05rem;
+    background:var(--bg);
+    color:var(--ember);
+    padding:11px 18px;
     display:inline-block;
-    margin-bottom:24px;
-    border:2px dashed var(--cyan);
+    margin-bottom:26px;
+    border:1px dashed var(--steel-dark);
   }
 
-  footer{
-    padding:30px 0;
-    text-align:center;
-    font-family:var(--mono);
-    font-size:.78rem;
-    color:#555;
-    letter-spacing:1px;
-  }
+  footer{ padding:34px 0; text-align:center; font-family:var(--mono); font-size:.76rem; color:var(--bone-dim); letter-spacing:1px; }
+  footer span{ color:var(--ember); }
 
-  /* ===== GLITCH GLOBAL ===== */
-  .glitch-active .wrap, .glitch-active header{
-    animation:glitch-shift .25s steps(2) ;
-  }
-  @keyframes glitch-shift{
+  /* ===== EVENTO DE CHISPAS (antes glitch) ===== */
+  .spark-active .wrap, .spark-active header{ animation:surge-shift .25s steps(2); }
+  @keyframes surge-shift{
     0%{ transform:translate(0,0); filter:none; }
-    20%{ transform:translate(-3px,2px); filter:hue-rotate(15deg); }
-    40%{ transform:translate(3px,-2px); filter:hue-rotate(-15deg); }
-    60%{ transform:translate(-2px,0px); filter:none; }
+    20%{ transform:translate(-2px,1px); filter:brightness(1.15); }
+    40%{ transform:translate(2px,-1px); filter:brightness(.92); }
+    60%{ transform:translate(-1px,0px); filter:none; }
     100%{ transform:translate(0,0); filter:none; }
   }
-  .glitch-slice{
-    position:fixed;
-    left:0; width:100%;
-    background:var(--bone);
-    z-index:900;
-    pointer-events:none;
-    opacity:0;
-    mix-blend-mode:difference;
-  }
-  .glitch-active .glitch-slice{ opacity:1; }
-
-  #bolt-layer{
-    position:fixed;
-    inset:0;
-    z-index:950;
-    pointer-events:none;
-    opacity:0;
-  }
+  #bolt-layer{ position:fixed; inset:0; z-index:950; pointer-events:none; opacity:0; }
   .bolt-active #bolt-layer{ opacity:1; }
   #bolt-layer svg{ width:100%; height:100%; }
-  .bolt-path{
-    stroke:var(--red);
-    stroke-width:3;
-    fill:none;
-    filter:drop-shadow(0 0 8px var(--red));
-    stroke-dasharray:1;
-    stroke-dashoffset:0;
-  }
-  .bolt-path.alt{ stroke:var(--cyan); filter:drop-shadow(0 0 8px var(--cyan)); }
-
-  /* ===== MINIJUEGO ===== */
-  .game-panel{
-    border:4px solid var(--ink);
-    background:#0d1117;
-    box-shadow:10px 10px 0 var(--ink);
-    position:relative;
-    padding:0;
-    overflow:hidden;
-  }
-  .game-hud{
-    display:flex;
-    gap:18px;
-    padding:12px 18px;
-    background:var(--ink);
-    border-bottom:4px solid var(--ink);
-  }
-  .hud-chip{
-    font-family:var(--mono);
-    font-size:.8rem;
-    letter-spacing:1px;
-    color:var(--bone);
-    font-weight:700;
-  }
-  .hud-chip span{ color:var(--yellow); }
-  #game-canvas{
-    display:block;
-    width:100%;
-    height:auto;
-    background:#0d1117;
-    image-rendering:pixelated;
-    cursor:crosshair;
-    touch-action:none;
-  }
-  .game-overlay{
-    position:absolute;
-    inset:0;
-    top:54px;
-    background:rgba(10,10,12,0.92);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:30px;
-    z-index:20;
-  }
-  .game-overlay.hidden{ display:none; }
-  .game-overlay h3{
-    font-family:var(--display);
-    font-size:clamp(1.6rem,3.5vw,2.4rem);
-    color:var(--yellow);
-    margin:0 0 14px;
-    text-shadow:3px 3px 0 var(--red);
-  }
-  .game-overlay p{
-    color:var(--bone-dim);
-    max-width:480px;
-    font-size:.95rem;
-    line-height:1.6;
-    margin:0 0 22px;
-  }
-  .game-hint{
-    font-family:var(--mono);
-    font-size:.78rem;
-    letter-spacing:1px;
-    color:#555;
-    margin-top:14px;
-    text-align:center;
-  }
-
-  /* controles tactiles del juego */
-  .touch-controls{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:16px;
-    padding:14px 18px;
-    background:var(--ink);
-    border-top:4px solid var(--ink);
-  }
-  .touch-move{ display:flex; gap:10px; }
-  .touch-btn{
-    font-family:var(--display);
-    font-size:1.4rem;
-    width:56px;
-    height:56px;
-    border:3px solid var(--bone);
-    background:var(--panel);
-    color:var(--bone);
-    border-radius:10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    user-select:none;
-    -webkit-user-select:none;
-    touch-action:manipulation;
-    cursor:pointer;
-  }
-  .touch-btn:active{ background:var(--cyan); color:var(--ink); }
-  .touch-attack{
-    width:72px;
-    height:72px;
-    font-size:1.8rem;
-    background:var(--red);
-    border-color:var(--bone);
-  }
-  .touch-attack:active{ background:var(--yellow); color:var(--ink); }
-
-  /* RGB split flicker pulse, brief */
-  .rgb-flicker{
-    position:fixed; inset:0; z-index:940; pointer-events:none; opacity:0;
-  }
-  .glitch-active .rgb-flicker{
-    opacity:.5;
-    background:linear-gradient(90deg, rgba(255,45,77,.5), transparent 2%, transparent 98%, rgba(57,230,196,.5));
-  }
+  .bolt-path{ stroke:var(--ember); stroke-width:2.4; fill:none; filter:drop-shadow(0 0 7px var(--ember)); }
+  .bolt-path.alt{ stroke:var(--chrome); filter:drop-shadow(0 0 6px var(--chrome)); }
+  .rgb-flicker{ position:fixed; inset:0; z-index:940; pointer-events:none; opacity:0; }
+  .spark-active .rgb-flicker{ opacity:.35; background:linear-gradient(90deg, rgba(255,90,31,.35), transparent 3%, transparent 97%, rgba(227,230,233,.25)); }
 
   @media (prefers-reduced-motion: reduce){
-    .glitch-active .wrap, .glitch-active header{ animation:none !important; }
-    #bolt-layer, .rgb-flicker, .glitch-slice{ display:none !important; }
+    .spark-active .wrap, .spark-active header{ animation:none !important; }
+    #bolt-layer, .rgb-flicker{ display:none !important; }
     .btn{ transition:none; }
   }
 
+  /* ===== MINIJUEGO ===== */
+  .game-panel{ border:1px solid var(--steel-dark); background:#08090a; box-shadow:0 16px 40px rgba(0,0,0,.5); position:relative; padding:0; overflow:hidden; }
+  .game-hud{ display:flex; gap:18px; padding:12px 18px; background:var(--surface); border-bottom:1px solid var(--line); }
+  .hud-chip{ font-family:var(--mono); font-size:.8rem; letter-spacing:1px; color:var(--bone); font-weight:600; }
+  .hud-chip span{ color:var(--ember); font-weight:700; }
+  #game-canvas{ display:block; width:100%; height:auto; background:#08090a; image-rendering:pixelated; cursor:crosshair; touch-action:none; }
+  .game-overlay{ position:absolute; inset:0; top:54px; background:rgba(8,9,10,0.94); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:30px; z-index:20; }
+  .game-overlay.hidden{ display:none; }
+  .game-overlay h3{ font-family:var(--display); font-weight:800; font-size:clamp(1.5rem,3.5vw,2.2rem); color:var(--chrome); margin:0 0 14px; }
+  .game-overlay p{ color:var(--bone-dim); max-width:480px; font-size:.95rem; line-height:1.6; margin:0 0 22px; }
+  .game-hint{ font-family:var(--mono); font-size:.76rem; letter-spacing:1px; color:var(--bone-dim); margin-top:14px; text-align:center; }
+
+  .touch-controls{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 18px; background:var(--surface); border-top:1px solid var(--line); }
+  .touch-move{ display:flex; gap:10px; }
+  .touch-btn{ font-family:var(--display); font-weight:700; font-size:1.4rem; width:56px; height:56px; border:1px solid var(--steel-dark); background:var(--surface-2); color:var(--chrome); border-radius:6px; display:flex; align-items:center; justify-content:center; user-select:none; -webkit-user-select:none; touch-action:manipulation; cursor:pointer; }
+  .touch-btn:active{ background:var(--ember); color:#100a06; }
+  .touch-attack{ width:72px; height:72px; font-size:1.8rem; background:var(--ember-dim); color:#100a06; border-color:var(--ember); }
+  .touch-attack:active{ background:var(--ember); }
+
   @media (max-width:880px){
     .services-grid{ grid-template-columns:1fr; }
-    .services-grid .service-card{ border-right:none; }
     .price-grid{ grid-template-columns:1fr; }
     .process-strip{ grid-template-columns:1fr; }
-    .process-strip .process-step{ border-right:none; border-bottom:4px solid var(--ink); }
-    .process-strip .process-step:last-child{ border-bottom:none; }
     nav.links{ display:none; }
     .pay-banner{ flex-direction:column; align-items:flex-start; }
     .terms-grid{ grid-template-columns:1fr; }
-    .terms-grid .term-card{ border-right:none; border-bottom:4px solid var(--ink); }
-    .terms-grid .term-card:last-child{ border-bottom:none; }
-    .contact-panel{ padding:40px 22px; }
+    .contact-panel{ padding:44px 24px; }
     .game-hud{ flex-wrap:wrap; gap:10px; }
   }
 </style>
 </head>
 <body>
 
-<div class="halftone-bg"></div>
+<div class="brushed-bg"></div>
 <div class="grain"></div>
 <div class="rgb-flicker"></div>
 <div id="bolt-layer"></div>
@@ -659,11 +461,11 @@
     </a>
     <nav class="links">
       <a href="#servicios">Servicios</a>
-      <a href="#precios">Precios</a>
+      <a href="#precios">Tarifas</a>
       <a href="#proceso">Proceso</a>
       <a href="#contacto">Contacto</a>
     </nav>
-    <a class="btn btn-small btn-red" href="mailto:or2494140@gmail.com?subject=Quiero%20una%20animaci%C3%B3n%20-%20Cuervo%20Blanco&body=Hola%2C%20me%20interesa%20cotizar%20un%20proyecto%20de%20animaci%C3%B3n.%0A%0AServicio%3A%20%0ADuraci%C3%B3n%20aprox%3A%20%0APresupuesto%3A%20" data-tilt>
+    <a class="btn btn-small btn-ember" href="mailto:or2494140@gmail.com?subject=Quiero%20una%20animaci%C3%B3n%20-%20Cuervo%20Blanco&body=Hola%2C%20me%20interesa%20cotizar%20un%20proyecto%20de%20animaci%C3%B3n.%0A%0AServicio%3A%20%0ADuraci%C3%B3n%20aprox%3A%20%0APresupuesto%3A%20" data-tilt>
       Escríbeme
     </a>
   </div>
@@ -674,18 +476,16 @@
   <!-- HERO -->
   <section class="hero" style="border-left:none;border-right:none;">
     <div class="hero-grid">
-      <div>
-        <span class="eyebrow">Estudio de animación freelance</span>
-        <h1>ANIMACIÓN<br>QUE CUENTA<br><span>TU HISTORIA</span></h1>
-        <p class="lead">Diseño y animo personajes, escenas y piezas de motion graphics en 2D y 3D para marcas, creadores y proyectos independientes. Trabajo de principio a fin: guion visual, producción y entrega final, con comunicación clara en cada etapa.</p>
-        <div class="cta-row">
-          <a class="btn btn-red" href="mailto:or2494140@gmail.com?subject=Cotizaci%C3%B3n%20de%20animaci%C3%B3n&body=Hola%20Cuervo%20Blanco%2C%0A%0AQuiero%20cotizar%3A%0A-%20Tipo%20de%20servicio%3A%0A-%20Duraci%C3%B3n%20estimada%3A%0A-%20Referencia%2Festilo%3A%0A-%20Fecha%20l%C3%ADmite%3A%0A%0A%C2%A1Gracias!" data-tilt>
-            ⚡ Pedir cotización
-          </a>
-          <a class="btn btn-ghost" href="#precios" data-tilt>
-            Ver precios
-          </a>
-        </div>
+      <span class="eyebrow">Estudio de animación independiente</span>
+      <h1>DALE VIDA<br>A TUS PENSAMIENTOS</h1>
+      <p class="lead">Soy un artista especializado en animación 2D, 3D y stop motion. Trabajo de principio a fin: guion visual, producción y entrega final, con comunicación clara en cada etapa.</p>
+      <div class="cta-row">
+        <a class="btn btn-ember" href="mailto:or2494140@gmail.com?subject=Cotizaci%C3%B3n%20de%20animaci%C3%B3n&body=Hola%20Cuervo%20Blanco%2C%0A%0AQuiero%20cotizar%3A%0A-%20Tipo%20de%20servicio%3A%0A-%20Duraci%C3%B3n%20estimada%3A%0A-%20Referencia%2Festilo%3A%0A-%20Fecha%20l%C3%ADmite%3A%0A%0A%C2%A1Gracias!" data-tilt>
+          Solicitar cotización
+        </a>
+        <a class="btn btn-ghost" href="#precios" data-tilt>
+          Ver tarifas
+        </a>
       </div>
     </div>
   </section>
@@ -693,16 +493,16 @@
   <!-- SERVICIOS -->
   <section id="servicios">
     <div class="section-head">
-      <span class="section-tag">Panel 01 — Catálogo</span>
-      <h2>Lo que sale del estudio</h2>
-      <p>Cinco disciplinas, un solo trazo. Elige la técnica que tu proyecto necesita o combínalas en una misma producción.</p>
+      <span class="section-tag">Capacidades del estudio</span>
+      <h2>Seis disciplinas, un solo proceso</h2>
+      <p>Cada proyecto se planea, produce y entrega bajo el mismo estándar: dirección de arte definida desde el primer boceto, comunicación constante y archivos finales listos para publicar.</p>
     </div>
-    <div class="services-grid">
+    <div class="services-grid riveted">
       <div class="service-card">
         <svg class="service-icon" viewBox="0 0 64 64" fill="none">
-          <rect x="6" y="6" width="52" height="52" stroke="#0a0a0c" stroke-width="3" fill="#ff2d4d"/>
-          <circle cx="32" cy="24" r="9" fill="#0a0a0c"/>
-          <path d="M18 48c2-12 9-18 14-18s12 6 14 18" stroke="#0a0a0c" stroke-width="3" fill="none"/>
+          <rect x="6" y="6" width="52" height="52" stroke="#e3e6e9" stroke-width="2" fill="#1b1b1e"/>
+          <circle cx="32" cy="24" r="9" fill="#ff5a1f"/>
+          <path d="M18 48c2-12 9-18 14-18s12 6 14 18" stroke="#e3e6e9" stroke-width="2" fill="none"/>
         </svg>
         <h3>Diseño de personajes</h3>
         <p>Creación de personajes originales desde cero: bocetos, hojas de modelo, paletas de color y expresiones, listos para animar en 2D o convertirse en modelo 3D.</p>
@@ -714,12 +514,12 @@
       </div>
       <div class="service-card">
         <svg class="service-icon" viewBox="0 0 64 64" fill="none">
-          <rect x="6" y="6" width="52" height="52" stroke="#0a0a0c" stroke-width="3" fill="#ffd23f"/>
-          <circle cx="24" cy="28" r="5" fill="#0a0a0c"/>
-          <path d="M16 46c4-10 12-14 16-14s12 4 16 14" stroke="#0a0a0c" stroke-width="3" fill="none"/>
+          <rect x="6" y="6" width="52" height="52" stroke="#e3e6e9" stroke-width="2" fill="#1b1b1e"/>
+          <circle cx="24" cy="28" r="5" fill="#ff5a1f"/>
+          <path d="M16 46c4-10 12-14 16-14s12 4 16 14" stroke="#e3e6e9" stroke-width="2" fill="none"/>
         </svg>
         <h3>Animación 2D</h3>
-        <p>Personajes, explicativos, lyric videos y series cortas con línea de cómic y color plano. Ideal para redes, branding y storytelling.</p>
+        <p>Animación cuadro a cuadro, explicativos, lyric videos y series cortas. Línea limpia y color pensados para redes, branding y storytelling.</p>
         <div class="service-tags">
           <span class="tag-chip">Frame a frame</span>
           <span class="tag-chip">Rig 2D</span>
@@ -728,100 +528,149 @@
       </div>
       <div class="service-card">
         <svg class="service-icon" viewBox="0 0 64 64" fill="none">
-          <rect x="6" y="6" width="52" height="52" stroke="#0a0a0c" stroke-width="3" fill="#39e6c4"/>
-          <path d="M32 14l16 9v18l-16 9-16-9V23z" stroke="#0a0a0c" stroke-width="3" fill="none"/>
-          <line x1="32" y1="14" x2="32" y2="32" stroke="#0a0a0c" stroke-width="3"/>
-          <line x1="16" y1="23" x2="32" y2="32" stroke="#0a0a0c" stroke-width="3"/>
-          <line x1="48" y1="23" x2="32" y2="32" stroke="#0a0a0c" stroke-width="3"/>
+          <rect x="6" y="6" width="52" height="52" stroke="#e3e6e9" stroke-width="2" fill="#1b1b1e"/>
+          <path d="M32 14l16 9v18l-16 9-16-9V23z" stroke="#ff5a1f" stroke-width="2" fill="none"/>
+          <line x1="32" y1="14" x2="32" y2="32" stroke="#e3e6e9" stroke-width="2"/>
+          <line x1="16" y1="23" x2="32" y2="32" stroke="#e3e6e9" stroke-width="2"/>
+          <line x1="48" y1="23" x2="32" y2="32" stroke="#e3e6e9" stroke-width="2"/>
         </svg>
         <h3>Modelado y animación 3D</h3>
-        <p>Modelado, rigging y render de personajes, props o escenas. Vueltas de producto, intros 3D y secuencias con cámara dinámica.</p>
+        <p>Modelado, rigging y render de personajes, props o escenas completas. Vueltas de producto, intros 3D y secuencias con cámara dinámica.</p>
         <div class="service-tags">
           <span class="tag-chip">Modelado</span>
           <span class="tag-chip">Rigging</span>
-          <span class="tag-chip">Render PBR</span>
+          <span class="tag-chip">Render</span>
         </div>
       </div>
       <div class="service-card">
         <svg class="service-icon" viewBox="0 0 64 64" fill="none">
-          <rect x="6" y="6" width="52" height="52" stroke="#0a0a0c" stroke-width="3" fill="#39e6c4"/>
-          <rect x="16" y="22" width="32" height="22" stroke="#0a0a0c" stroke-width="3" fill="none"/>
-          <path d="M16 22l10-8h12l10 8" stroke="#0a0a0c" stroke-width="3" fill="none" stroke-linejoin="round"/>
-          <circle cx="32" cy="33" r="5" stroke="#0a0a0c" stroke-width="3" fill="none"/>
+          <rect x="6" y="6" width="52" height="52" stroke="#e3e6e9" stroke-width="2" fill="#1b1b1e"/>
+          <rect x="16" y="20" width="32" height="24" rx="2" stroke="#e3e6e9" stroke-width="2" fill="none"/>
+          <circle cx="26" cy="30" r="3" fill="#ff5a1f"/>
+          <path d="M16 40l10-8 8 6 6-5 8 7" stroke="#e3e6e9" stroke-width="2" fill="none"/>
         </svg>
-        <h3>Anuncios y comerciales 3D</h3>
-        <p>Spots publicitarios y presentaciones de producto en 3D: escenografía, iluminación y cámara animada para campañas que necesitan verse premium.</p>
+        <h3>Stop Motion</h3>
+        <p>Fotografía cuadro a cuadro con muñecos, objetos o materiales reales. Puesta en escena, iluminación práctica y animación de attrezzo hecha a mano.</p>
         <div class="service-tags">
-          <span class="tag-chip">Spot publicitario</span>
-          <span class="tag-chip">Producto 3D</span>
-          <span class="tag-chip">Cámara animada</span>
+          <span class="tag-chip">Attrezzo</span>
+          <span class="tag-chip">Iluminación práctica</span>
+          <span class="tag-chip">Fotograma a fotograma</span>
         </div>
       </div>
       <div class="service-card">
         <svg class="service-icon" viewBox="0 0 64 64" fill="none">
-          <rect x="6" y="6" width="52" height="52" stroke="#0a0a0c" stroke-width="3" fill="#ff2d4d"/>
-          <path d="M14 44l10-22 8 16 6-10 12 16" stroke="#0a0a0c" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="6" y="6" width="52" height="52" stroke="#e3e6e9" stroke-width="2" fill="#1b1b1e"/>
+          <rect x="14" y="16" width="16" height="12" stroke="#e3e6e9" stroke-width="2" fill="none"/>
+          <rect x="34" y="16" width="16" height="12" stroke="#e3e6e9" stroke-width="2" fill="none"/>
+          <rect x="14" y="36" width="16" height="12" stroke="#ff5a1f" stroke-width="2" fill="none"/>
+          <rect x="34" y="36" width="16" height="12" stroke="#e3e6e9" stroke-width="2" fill="none"/>
+        </svg>
+        <h3>Storyboard y guion visual</h3>
+        <p>Planos, encuadres y ritmo narrativo definidos antes de animar una sola línea, para que la producción avance sobre una base ya aprobada.</p>
+        <div class="service-tags">
+          <span class="tag-chip">Planos</span>
+          <span class="tag-chip">Ritmo narrativo</span>
+          <span class="tag-chip">Dirección de arte</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 64 64" fill="none">
+          <rect x="6" y="6" width="52" height="52" stroke="#e3e6e9" stroke-width="2" fill="#1b1b1e"/>
+          <path d="M14 44l10-22 8 16 6-10 12 16" stroke="#ff5a1f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         <h3>Motion Graphics</h3>
-        <p>Logo reveals, kinetic typography, transiciones glitch y gráficos animados para video, streams o presentaciones de marca.</p>
+        <p>Logo reveals, tipografía cinética y gráficos animados para video, streams o presentaciones de marca.</p>
         <div class="service-tags">
           <span class="tag-chip">Kinetic type</span>
-          <span class="tag-chip">VFX / glitch</span>
+          <span class="tag-chip">VFX</span>
           <span class="tag-chip">Branding motion</span>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- HERRAMIENTAS -->
+  <section id="herramientas">
+    <div class="section-head">
+      <span class="section-tag">Flujo de trabajo</span>
+      <h2>Herramientas del estudio</h2>
+      <p>Producción, edición y sonido bajo un mismo pipeline profesional.</p>
+    </div>
+    <div class="tools-row">
+      <span class="tool-pill">Blender</span>
+      <span class="tool-pill">Adobe Animate</span>
+      <span class="tool-pill">Adobe Audition</span>
+      <span class="tool-pill">Premiere Pro</span>
+      <span class="tool-pill">After Effects</span>
+      <span class="tool-pill">Moho Pro</span>
+      <span class="tool-pill">Illustrator</span>
+      <span class="tool-pill">Photoshop</span>
+      <span class="tool-pill">Etc...</span>
+    </div>
+  </section>
+
   <!-- PRECIOS -->
   <section id="precios">
     <div class="section-head">
-      <span class="section-tag">Panel 02 — Tarifario</span>
-      <h2>Precios sin letra chica</h2>
-      <p>Tarifas de referencia por entrega. El precio final depende de duración, complejidad y revisiones — siempre con presupuesto cerrado antes de empezar.</p>
+      <span class="section-tag">Tarifario 2026</span>
+      <h2>Inversión por servicio</h2>
+      <p>Precios de referencia por elemento de producción, en dólares (USD). El presupuesto final se confirma antes de iniciar cualquier proyecto.</p>
     </div>
     <div class="price-grid">
-      <div class="price-card">
+      <div class="price-card riveted">
         <span class="tag-chip">2D</span>
-        <h3>Animación 2D</h3>
-        <span class="price-amount">$120+</span>
-        <span class="price-unit">USD por 1 minuto</span>
+        <h3>Producción 2D</h3>
         <ul class="price-list">
-          <li>Personaje o ilustración base incluida</li>
-          <li>Hasta 2 rondas de corrección</li>
-          <li>Entrega en MP4 + GIF/loop</li>
-          <li>Audio y voces: a cotizar aparte</li>
+          <li class="price-line"><span class="item">Storyboard<small>Sobre guion ya escrito</small></span><span class="amount">$85 USD</span></li>
+          <li class="price-line"><span class="item">Animación 30 seg — Line art<small>Cuadro a cuadro</small></span><span class="amount">$40 USD</span></li>
+          <li class="price-line"><span class="item">Animación 30 seg — Color</span><span class="amount">$40 USD</span></li>
+          <li class="price-line"><span class="item">Animación 30 seg — Sombras y detalles</span><span class="amount">$40 USD</span></li>
+          <li class="price-line"><span class="item">Animaciones secundarias</span><span class="amount">$40 USD</span></li>
+          <li class="price-line"><span class="item">Creación de escenario</span><span class="amount">$30 USD</span></li>
         </ul>
-        <a class="btn btn-small btn-ghost" href="mailto:or2494140@gmail.com?subject=Cotizaci%C3%B3n%20Animaci%C3%B3n%202D" data-tilt>Cotizar 2D</a>
+        <div class="price-note">Incluye <strong>2 rondas de cambios</strong>. Rondas adicionales: <strong>$5 USD</strong> c/u.</div>
       </div>
 
-      <div class="price-card featured">
-        <span class="ribbon">MÁS PEDIDO</span>
-        <span class="tag-chip">MOTION</span>
-        <h3>Motion Graphics</h3>
-        <span class="price-amount">$90+</span>
-        <span class="price-unit">USD por pieza (hasta 40s)</span>
-        <ul class="price-list">
-          <li>Logo reveal o kinetic typography</li>
-          <li>Efectos glitch / VFX de marca</li>
-          <li>Adaptación a formatos verticales</li>
-          <li>Entrega en 3 a 5 días</li>
-        </ul>
-        <a class="btn btn-small btn-cyan" href="mailto:or2494140@gmail.com?subject=Cotizaci%C3%B3n%20Motion%20Graphics" data-tilt>Cotizar Motion</a>
-      </div>
-
-      <div class="price-card">
+      <div class="price-card riveted">
         <span class="tag-chip">3D</span>
-        <h3>Animación 3D</h3>
-        <span class="price-amount">$200+</span>
-        <span class="price-unit">USD por 1 minuto</span>
+        <h3>Producción 3D</h3>
         <ul class="price-list">
-          <li>Modelado y rig de un elemento</li>
-          <li>Render con iluminación e texturas</li>
-          <li>Cámara animada incluida</li>
-          <li>Escenas múltiples: precio por escena</li>
+          <li class="price-line"><span class="item">Modelado 3D — Personajes</span><span class="amount">$40 USD</span></li>
+          <li class="price-line"><span class="item">Modelado 3D — Escenarios</span><span class="amount">$75 USD</span></li>
+          <li class="price-line"><span class="item">Rigging</span><span class="amount">$40 USD</span></li>
+          <li class="price-line"><span class="item">Animación — 1 min o más<small>Sobre contenido ya existente (modelos y rig entregados)</small></span><span class="amount">$99 USD</span></li>
         </ul>
-        <a class="btn btn-small btn-ghost" href="mailto:or2494140@gmail.com?subject=Cotizaci%C3%B3n%20Animaci%C3%B3n%203D" data-tilt>Cotizar 3D</a>
+        <div class="price-note">Incluye <strong>2 rondas de cambios</strong>. Rondas adicionales: <strong>$5 USD</strong> c/u.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIEMPOS -->
+  <section id="tiempos">
+    <div class="section-head">
+      <span class="section-tag">Tiempos de producción</span>
+      <h2>Un proceso cuidado, no apresurado</h2>
+      <p>Cada etapa se toma el tiempo necesario para que el resultado final tenga la calidad que buscás. Estos son los tiempos de referencia por elemento — se ajustan según la complejidad del proyecto y la carga de trabajo del momento.</p>
+    </div>
+    <div class="price-grid">
+      <div class="price-card riveted">
+        <span class="tag-chip">2D</span>
+        <h3>Producción 2D</h3>
+        <ul class="price-list">
+          <li class="price-line"><span class="item">Animación de 1 minuto<small>Cuadro a cuadro, con línea, color y sombras</small></span><span class="amount">5–7 días</span></li>
+        </ul>
+        <div class="price-note">Piezas más cortas como storyboard, escenarios o motion graphics suelen entregarse en menos tiempo, según la complejidad del guion.</div>
+      </div>
+
+      <div class="price-card riveted">
+        <span class="tag-chip">3D</span>
+        <h3>Producción 3D</h3>
+        <ul class="price-list">
+          <li class="price-line"><span class="item">Animación de 1 minuto<small>Sobre modelo y rig ya entregados</small></span><span class="amount">5–7 días</span></li>
+          <li class="price-line"><span class="item">Modelado de personaje</span><span class="amount">3 días</span></li>
+          <li class="price-line"><span class="item">Rigging profesional<small>Hecho en Blender, listo para animar</small></span><span class="amount">5 días</span></li>
+        </ul>
+        <div class="price-note">Los tiempos son consecutivos por etapa: si tu proyecto necesita modelado, rigging y animación, se suman en ese orden de producción.</div>
       </div>
     </div>
   </section>
@@ -829,11 +678,11 @@
   <!-- PROCESO -->
   <section id="proceso">
     <div class="section-head">
-      <span class="section-tag">Panel 03 — Cómo trabajamos</span>
+      <span class="section-tag">Cómo trabajamos</span>
       <h2>De la idea al frame final</h2>
-      <p>Cuatro viñetas, un mismo arco narrativo: tu proyecto, contado bien.</p>
+      <p>Cuatro etapas, un mismo hilo conductor: tu proyecto, contado bien.</p>
     </div>
-    <div class="process-strip">
+    <div class="process-strip riveted">
       <div class="process-step">
         <span class="step-num">01</span>
         <h4>Guion y referencia</h4>
@@ -846,8 +695,8 @@
       </div>
       <div class="process-step">
         <span class="step-num">03</span>
-        <h4>Animación</h4>
-        <p>Producción del movimiento, texturas y efectos según la técnica elegida.</p>
+        <h4>Producción</h4>
+        <p>Modelado, rigging, animación, texturas o fotografía cuadro a cuadro, según la técnica elegida.</p>
       </div>
       <div class="process-step">
         <span class="step-num">04</span>
@@ -859,7 +708,7 @@
 
   <!-- PAGO -->
   <section id="pago">
-    <div class="pay-banner">
+    <div class="pay-banner riveted">
       <div class="pay-banner-text">
         <h3>Métodos de pago</h3>
         <p>Trabajo con clientes de cualquier país. Por ahora acepto pagos únicamente por PayPal o Western Union — coordinamos el método al confirmar el proyecto.</p>
@@ -874,37 +723,37 @@
   <!-- TERMINOS -->
   <section id="terminos">
     <div class="section-head">
-      <span class="section-tag">Panel 03.5 — Reglas claras</span>
+      <span class="section-tag">Reglas claras</span>
       <h2>Cómo trabajamos juntos</h2>
-      <p>Tres reglas simples que mantienen el proyecto justo para los dos.</p>
+      <p>Tres condiciones simples que mantienen el proyecto justo para los dos.</p>
     </div>
-    <div class="terms-grid">
+    <div class="terms-grid riveted">
       <div class="term-card">
-        <span class="term-icon">①</span>
+        <span class="term-icon">01</span>
         <h3>50% por adelantado</h3>
         <p>Para reservar la fecha y empezar a producir, se abona el 50% del presupuesto al confirmar el proyecto. El otro 50% se paga al entregar el trabajo final.</p>
       </div>
       <div class="term-card">
-        <span class="term-icon">②</span>
-        <h3>3 cambios incluidos</h3>
-        <p>Cada proyecto incluye hasta 3 rondas de cambios sin costo extra. A partir del cuarto cambio, cada ronda adicional tiene un costo de <strong>$15 USD</strong>.</p>
+        <span class="term-icon">02</span>
+        <h3>2 cambios incluidos</h3>
+        <p>Cada servicio incluye hasta 2 rondas de cambios sin costo extra. A partir de la tercera, cada ronda adicional tiene un costo de <strong>$5 USD</strong>.</p>
       </div>
       <div class="term-card">
-        <span class="term-icon">③</span>
+        <span class="term-icon">03</span>
         <h3>Idea clara antes de empezar</h3>
-        <p>Antes de arrancar la producción, necesito que la idea esté definida: estilo, mensaje y referencias. Mientras más clara llegue la idea, más rápida y precisa sale la animación.</p>
+        <p>Antes de arrancar la producción necesito la idea definida: estilo, mensaje y referencias. Mientras más clara llegue, más rápida y precisa sale la animación.</p>
       </div>
     </div>
   </section>
 
   <!-- CONTACTO -->
   <section id="contacto">
-    <div class="contact-panel">
+    <div class="contact-panel riveted">
       <h2>¿HABLAMOS DE<br>TU PROYECTO?</h2>
-      <p>Cuéntame qué necesitás animar y te respondo con una propuesta y presupuesto a medida.</p>
+      <p>Contame qué necesitás animar y te respondo con una propuesta y presupuesto a medida.</p>
       <div class="email-display">or2494140@gmail.com</div><br>
-      <a class="btn btn-red" href="mailto:or2494140@gmail.com?subject=Quiero%20una%20animaci%C3%B3n%20-%20Cuervo%20Blanco&body=Hola%20Cuervo%20Blanco%2C%0A%0AMe%20interesa%20una%20animaci%C3%B3n.%0A-%20Tipo%20de%20servicio%3A%0A-%20Duraci%C3%B3n%20estimada%3A%0A-%20Idea%2Freferencia%3A%0A-%20Presupuesto%20disponible%3A%0A%0A%C2%A1Gracias!" data-tilt>
-        ✉ Enviar correo ahora
+      <a class="btn btn-ember" href="mailto:or2494140@gmail.com?subject=Quiero%20una%20animaci%C3%B3n%20-%20Cuervo%20Blanco&body=Hola%20Cuervo%20Blanco%2C%0A%0AMe%20interesa%20una%20animaci%C3%B3n.%0A-%20Tipo%20de%20servicio%3A%0A-%20Duraci%C3%B3n%20estimada%3A%0A-%20Idea%2Freferencia%3A%0A-%20Presupuesto%20disponible%3A%0A%0A%C2%A1Gracias!" data-tilt>
+        Enviar correo ahora
       </a>
     </div>
   </section>
@@ -912,9 +761,9 @@
   <!-- MINIJUEGO -->
   <section id="juego">
     <div class="section-head">
-      <span class="section-tag">Panel 04 — Modo arcade</span>
+      <span class="section-tag">Modo demo</span>
       <h2>Rescate en el sector cuervo</h2>
-      <p>Una pequeña demo jugable hecha con el mismo estilo del estudio. Un caballero, una invasión alien y una princesa por rescatar — porque a este estudio le gusta animar incluso lo que se juega.</p>
+      <p>Una pequeña demo jugable hecha con el mismo estilo del estudio. Un caballero, una invasión alien y una princesa por rescatar.</p>
     </div>
 
     <div class="game-panel">
@@ -927,7 +776,7 @@
       <div class="game-overlay" id="game-overlay">
         <h3 id="overlay-title">RESCATE EN EL SECTOR CUERVO</h3>
         <p id="overlay-text">Los aliens capturaron a la princesa Lyra. Movete con las flechas o WASD, atacá con ESPACIO o un click. Sobrevive 5 oleadas y rescatala.</p>
-        <button class="btn btn-red" id="game-start-btn" data-tilt>⚔ Empezar misión</button>
+        <button class="btn btn-ember" id="game-start-btn" data-tilt>Empezar misión</button>
       </div>
       <div class="touch-controls">
         <div class="touch-move">
@@ -943,7 +792,7 @@
 </div>
 
 <footer>
-  CUERVO BLANCO ANIMATIONS — ESTUDIO FREELANCE · 2026 · TODOS LOS GLITCHES SON INTENCIONALES
+  CUERVO BLANCO ANIMATIONS — ESTUDIO DE ANIMACIÓN INDEPENDIENTE · 2026 · <span>2D · 3D · STOP MOTION</span>
 </footer>
 
 <script>
@@ -954,8 +803,8 @@
       const r = el.getBoundingClientRect();
       const x = (e.clientX - r.left)/r.width - 0.5;
       const y = (e.clientY - r.top)/r.height - 0.5;
-      el.style.setProperty('--tilt-y', (x*18)+'deg');
-      el.style.setProperty('--tilt-x', (-y*18)+'deg');
+      el.style.setProperty('--tilt-y', (x*14)+'deg');
+      el.style.setProperty('--tilt-x', (-y*14)+'deg');
     });
     el.addEventListener('mouseleave', ()=>{
       el.style.setProperty('--tilt-y','0deg');
@@ -963,7 +812,7 @@
     });
   });
 
-  // ---- Generador de rayos SVG ----
+  // ---- Generador de chispas / sobrecarga eléctrica ----
   const boltLayer = document.getElementById('bolt-layer');
   function randomBoltPath(){
     const startX = Math.random()*window.innerWidth;
@@ -994,27 +843,22 @@
     boltLayer.appendChild(svg);
   }
 
-  function triggerGlitchEvent(){
+  function triggerSparkEvent(){
     spawnBolts();
     document.body.classList.add('bolt-active');
-    document.body.classList.add('glitch-active');
-    setTimeout(()=>{
-      document.body.classList.remove('glitch-active');
-    }, 260);
+    document.body.classList.add('spark-active');
+    setTimeout(()=>{ document.body.classList.remove('spark-active'); }, 260);
     setTimeout(()=>{
       document.body.classList.remove('bolt-active');
       boltLayer.innerHTML = "";
     }, 420);
   }
 
-  // dispara cada 30s
-  setInterval(triggerGlitchEvent, 30000);
-  // primer disparo a los 6s para mostrar el efecto pronto
-  setTimeout(triggerGlitchEvent, 6000);
+  setInterval(triggerSparkEvent, 30000);
+  setTimeout(triggerSparkEvent, 6000);
 
   // =====================================================
   // MINIJUEGO: RESCATE EN EL SECTOR CUERVO
-  // Caballero vs aliens, 5 oleadas, rescate de la princesa
   // =====================================================
   (function(){
     const canvas = document.getElementById('game-canvas');
@@ -1032,7 +876,7 @@
 
     const TOTAL_WAVES = 5;
 
-    let state = 'idle'; // idle | playing | won | lost
+    let state = 'idle';
     let keys = {};
     let lastTime = 0;
     let spawnTimer = 0;
@@ -1120,25 +964,24 @@
 
     function gameOver(){
       state = 'lost';
-      overlayTitle.textContent = '¡EL CABALLERO HA CAÍDO!';
+      overlayTitle.textContent = 'EL CABALLERO HA CAÍDO';
       overlayText.textContent = `Llegaste a la oleada ${Math.min(wave,TOTAL_WAVES)} con ${score} puntos. La princesa Lyra sigue cautiva... ¿le das otra oportunidad al estudio?`;
-      startBtn.textContent = '⚔ Reintentar misión';
+      startBtn.textContent = 'Reintentar misión';
       overlay.classList.remove('hidden');
     }
 
     function gameWon(){
       state = 'won';
       princess.rescued = true;
-      overlayTitle.textContent = '¡PRINCESA RESCATADA!';
+      overlayTitle.textContent = 'PRINCESA RESCATADA';
       overlayText.textContent = `Despejaste las 5 oleadas alienígenas y rescataste a Lyra con ${score} puntos. Así de bien le va a tu proyecto cuando lo animamos juntos.`;
-      startBtn.textContent = '⚔ Jugar de nuevo';
+      startBtn.textContent = 'Jugar de nuevo';
       overlay.classList.remove('hidden');
     }
 
     function update(dt){
       if(state !== 'playing') return;
 
-      // movimiento caballero
       let move = 0;
       if(keys['ArrowLeft'] || keys['a'] || keys['A']){ move -= 1; }
       if(keys['ArrowRight'] || keys['d'] || keys['D']){ move += 1; }
@@ -1146,7 +989,6 @@
       knight.x += move * knight.speed * dt;
       knight.x = Math.max(40, Math.min(W-40, knight.x));
 
-      // ataque
       if(knight.attackCooldown > 0) knight.attackCooldown -= dt;
       if(knight.attacking){
         knight.attackTimer -= dt;
@@ -1154,7 +996,6 @@
       }
       if(knight.hurtTimer > 0) knight.hurtTimer -= dt;
 
-      // spawnear aliens de la oleada
       spawnTimer -= dt;
       if(waveAliensToSpawn > 0 && spawnTimer <= 0){
         spawnAlien();
@@ -1162,7 +1003,6 @@
         spawnTimer = 0.7 + Math.random()*0.5;
       }
 
-      // actualizar aliens
       for(let i = aliens.length-1; i>=0; i--){
         const a = aliens[i];
         a.bob += dt*6;
@@ -1171,33 +1011,30 @@
         a.x += dir * a.speed * dt;
         if(a.hitFlash>0) a.hitFlash -= dt;
 
-        // alien golpea al caballero
         if(rectsOverlap(a, knight) && knight.hurtTimer <= 0){
           knight.lives -= 1;
           knight.hurtTimer = 1.0;
           screenShake = 10;
-          spawnParticles(knight.x, knight.y-30, '#ff2d4d', 10);
+          spawnParticles(knight.x, knight.y-30, '#ff5a1f', 10);
           updateHud();
           if(knight.lives <= 0){
-            spawnParticles(knight.x, knight.y-30, '#ffd23f', 20);
+            spawnParticles(knight.x, knight.y-30, '#ffb347', 20);
             gameOver();
             return;
           }
         }
 
-        // golpe de espada del caballero
         if(knight.attacking){
-          const reach = knight.facing === 1 ? knight.x+50 : knight.x-50;
           const closeEnough = Math.abs(a.x - knight.x) < 60 &&
             ((knight.facing===1 && a.x > knight.x) || (knight.facing===-1 && a.x < knight.x));
           if(closeEnough && a.hitFlash<=0){
             a.hp -= 1;
             a.hitFlash = 0.25;
-            spawnParticles(a.x, a.y-20, '#39e6c4', 8);
+            spawnParticles(a.x, a.y-20, '#e3e6e9', 8);
             screenShake = Math.max(screenShake, 4);
             if(a.hp <= 0){
               score += a.type==='brute' ? 30 : 15;
-              spawnParticles(a.x, a.y-20, '#ffd23f', 14);
+              spawnParticles(a.x, a.y-20, '#ffb347', 14);
               aliens.splice(i,1);
               waveAliensLeft--;
               updateHud();
@@ -1207,7 +1044,6 @@
         }
       }
 
-      // checar fin de oleada
       if(waveAliensToSpawn === 0 && aliens.length === 0){
         if(wave >= TOTAL_WAVES){
           gameWon();
@@ -1218,7 +1054,6 @@
         }
       }
 
-      // particulas
       for(let i=particles.length-1;i>=0;i--){
         const p = particles[i];
         p.life -= dt;
@@ -1232,28 +1067,25 @@
     }
 
     function drawBackground(){
-      // cielo degradado tipo comic
       const grad = ctx.createLinearGradient(0,0,0,H);
-      grad.addColorStop(0,'#1c1430');
-      grad.addColorStop(1,'#0d1117');
+      grad.addColorStop(0,'#151517');
+      grad.addColorStop(1,'#08090a');
       ctx.fillStyle = grad;
       ctx.fillRect(0,0,W,H);
 
-      // estrellas
-      ctx.fillStyle = '#39e6c4';
+      ctx.fillStyle = '#8a8e94';
       for(let i=0;i<40;i++){
         const sx = (i*53) % W;
         const sy = (i*97) % (GROUND_Y-40);
-        ctx.globalAlpha = 0.15 + ((i*31)%10)/40;
+        ctx.globalAlpha = 0.12 + ((i*31)%10)/45;
         ctx.fillRect(sx, sy, 2, 2);
       }
       ctx.globalAlpha = 1;
 
-      // suelo
-      ctx.fillStyle = '#15151a';
+      ctx.fillStyle = '#141416';
       ctx.fillRect(0, GROUND_Y+20, W, H-GROUND_Y-20);
-      ctx.strokeStyle = '#ff2d4d';
-      ctx.lineWidth = 3;
+      ctx.strokeStyle = '#ff5a1f';
+      ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.moveTo(0, GROUND_Y+20);
       ctx.lineTo(W, GROUND_Y+20);
@@ -1267,34 +1099,29 @@
       if(k.hurtTimer > 0 && Math.floor(k.hurtTimer*16)%2===0) ctx.globalAlpha = 0.4;
       ctx.scale(k.facing, 1);
 
-      // cuerpo
-      ctx.fillStyle = '#dcd6c4';
-      ctx.strokeStyle = '#0a0a0c';
-      ctx.lineWidth = 3;
+      ctx.fillStyle = '#c9cdd2';
+      ctx.strokeStyle = '#3a3c40';
+      ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.roundRect(-12,-50,24,40,4);
       ctx.fill(); ctx.stroke();
 
-      // casco
-      ctx.fillStyle = '#39e6c4';
+      ctx.fillStyle = '#e3e6e9';
       ctx.beginPath();
       ctx.arc(0,-56,12,Math.PI, 2*Math.PI);
       ctx.fill(); ctx.stroke();
-      ctx.fillStyle = '#0a0a0c';
+      ctx.fillStyle = '#3a3c40';
       ctx.fillRect(-7,-58,14,4);
 
-      // piernas
-      ctx.fillStyle = '#0a0a0c';
+      ctx.fillStyle = '#3a3c40';
       ctx.fillRect(-10,-10,8,10);
       ctx.fillRect(2,-10,8,10);
 
-      // escudo
-      ctx.fillStyle = '#ff2d4d';
+      ctx.fillStyle = '#ff5a1f';
       ctx.beginPath();
       ctx.roundRect(-22,-38,10,22,3);
       ctx.fill(); ctx.stroke();
 
-      // espada
       ctx.save();
       let swordAngle = -0.3;
       if(k.attacking){
@@ -1303,8 +1130,8 @@
       }
       ctx.translate(14,-30);
       ctx.rotate(swordAngle);
-      ctx.fillStyle = '#ffd23f';
-      ctx.strokeStyle = '#0a0a0c';
+      ctx.fillStyle = '#e9e6dd';
+      ctx.strokeStyle = '#3a3c40';
       ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.moveTo(0,0);
@@ -1312,7 +1139,7 @@
       ctx.lineTo(34,4);
       ctx.closePath();
       ctx.fill(); ctx.stroke();
-      ctx.fillStyle = '#0a0a0c';
+      ctx.fillStyle = '#3a3c40';
       ctx.fillRect(-4,-3,8,6);
       ctx.restore();
 
@@ -1324,24 +1151,22 @@
       ctx.save();
       const bobY = Math.sin(a.bob)*3;
       ctx.translate(a.x, a.y + bobY);
-      ctx.fillStyle = a.hitFlash > 0 ? '#ffffff' : (a.type==='brute' ? '#ff2d4d' : '#39e6c4');
-      ctx.strokeStyle = '#0a0a0c';
-      ctx.lineWidth = 3;
+      ctx.fillStyle = a.hitFlash > 0 ? '#ffffff' : (a.type==='brute' ? '#ff5a1f' : '#8a8e94');
+      ctx.strokeStyle = '#3a3c40';
+      ctx.lineWidth = 2;
 
       ctx.beginPath();
       ctx.ellipse(0, -a.h*0.55, a.w*0.42, a.h*0.42, 0, 0, Math.PI*2);
       ctx.fill(); ctx.stroke();
 
-      // ojos
-      ctx.fillStyle = '#0a0a0c';
+      ctx.fillStyle = '#0a0a0b';
       ctx.beginPath();
       ctx.arc(-a.w*0.14, -a.h*0.6, 3.5, 0, Math.PI*2);
       ctx.arc(a.w*0.14, -a.h*0.6, 3.5, 0, Math.PI*2);
       ctx.fill();
 
-      // tentaculos
-      ctx.strokeStyle = a.type==='brute' ? '#ff2d4d' : '#39e6c4';
-      ctx.lineWidth = 4;
+      ctx.strokeStyle = a.type==='brute' ? '#ff5a1f' : '#8a8e94';
+      ctx.lineWidth = 3;
       for(let i=-1;i<=1;i++){
         ctx.beginPath();
         ctx.moveTo(i*a.w*0.25, -a.h*0.2);
@@ -1352,18 +1177,17 @@
     }
 
     function drawPrincessCage(){
-      // jaula con la princesa al fondo derecho, decorativo
       ctx.save();
       ctx.translate(princess.x, princess.y);
-      ctx.strokeStyle = princess.rescued ? '#ffd23f' : '#555';
-      ctx.lineWidth = 3;
+      ctx.strokeStyle = princess.rescued ? '#ff5a1f' : '#4a4d52';
+      ctx.lineWidth = 2;
       for(let i=-18;i<=18;i+=9){
         ctx.beginPath();
         ctx.moveTo(i,-56);
         ctx.lineTo(i,4);
         ctx.stroke();
       }
-      ctx.fillStyle = princess.rescued ? '#ffd23f' : '#dcd6c4';
+      ctx.fillStyle = princess.rescued ? '#ffb347' : '#c9cdd2';
       ctx.beginPath();
       ctx.arc(0,-46,9,0,Math.PI*2);
       ctx.fill();
@@ -1424,7 +1248,6 @@
     canvas.addEventListener('click', attack);
     canvas.addEventListener('touchstart', (e)=>{ e.preventDefault(); attack(); }, {passive:false});
 
-    // ---- Controles táctiles para celular ----
     const touchLeft = document.getElementById('touch-left');
     const touchRight = document.getElementById('touch-right');
     const touchAttack = document.getElementById('touch-attack');
@@ -1435,7 +1258,6 @@
       el.addEventListener('touchstart', press, {passive:false});
       el.addEventListener('touchend', release, {passive:false});
       el.addEventListener('touchcancel', release, {passive:false});
-      // tambien soporta mouse, por si alguien lo usa con click en desktop
       el.addEventListener('mousedown', press);
       el.addEventListener('mouseup', release);
       el.addEventListener('mouseleave', release);
@@ -1453,7 +1275,6 @@
       state = 'playing';
     });
 
-    // dibuja un primer frame estatico antes de iniciar
     drawBackground();
     drawPrincessCage();
     requestAnimationFrame(loop);
